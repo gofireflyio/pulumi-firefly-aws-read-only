@@ -6,18 +6,18 @@ template:
     aws:region:
       description: The AWS region to deploy into
       default: us-east-1
-    fireflyAccessKey:
+    firefly:accessKey:
       description: Your authentication access_key
-    fireflySecretKey:
+    firefly:secretKey:
       description: Your authentication secret_key
-    name:
+    firefly:integrationName:
       description: Name of the AWS integration
-    fireflyEndpoint:
+    firefly:endpoint:
       description: The Firefly endpoint to register account management
       default: https://prodapi.infralight.cloud/api
-    isProd:
+    firefly:integrationIsProd:
       description: Is Production?
       default: false
-    fullScanEnabled:
+    firefly:integrationFullScanEnabled:
       description: Full scan enabled?
       default: true
