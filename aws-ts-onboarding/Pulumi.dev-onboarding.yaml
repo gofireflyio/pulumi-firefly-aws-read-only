@@ -1,8 +1,0 @@
-config:
-  aws:region: us-west-2
-  firefly:accessKey: INFLWAYNWWTACRYDSVOX
-  firefly:endpoint: https://prodapi.infralight.cloud/api
-  firefly:integrationFullScanEnabled: "true"
-  firefly:integrationIsProd: "false"
-  firefly:integrationName: dev-integ
-  firefly:secretKey: pNiVby6lWXEXfL4LjY4hgpNAE1ilP5gknycNYQdY99BiZNHGppOxDph6LeYlM53M
