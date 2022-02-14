@@ -18,13 +18,3 @@ To check if you have cURL installed, type the following command in your terminal
 ```shell script
 curl --help
 ```
-
-### Installation
-
-```hcl-terraform
-module "firefly-read-only" {
-  source              = "infralight/terraform-firefly-aws-read-only"
-  firefly_access_key  = "YOUR_ACCESS_KEY"
-  fierfly_secret_key  = "YOUR_SECRET_KEY"
-}
-```
