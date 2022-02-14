@@ -1,1 +1,0 @@
-# pulumi-firefly-aws-read-only
