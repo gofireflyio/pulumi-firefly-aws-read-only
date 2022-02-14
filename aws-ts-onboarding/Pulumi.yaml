@@ -1,0 +1,3 @@
+name: aws-ts-onboarding
+runtime: nodejs
+description: A TypeScript Pulumi program with AWS Native provider that onboards accounts into Firefly
