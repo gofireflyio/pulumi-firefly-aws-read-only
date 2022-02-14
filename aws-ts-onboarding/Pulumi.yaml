@@ -1,0 +1,23 @@
+name: aws-ts-onboarding
+runtime: nodejs
+description: A TypeScript Pulumi program with AWS Native provider that onboards accounts into Firefly
+template:
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: us-east-1
+    firefly:accessKey:
+      description: Your authentication access_key
+    firefly:secretKey:
+      description: Your authentication secret_key
+    firefly:integrationName:
+      description: Name of the AWS integration
+    firefly:endpoint:
+      description: The Firefly endpoint to register account management
+      default: https://prodapi.infralight.cloud/api
+    firefly:integrationIsProd:
+      description: Is Production?
+      default: false
+    firefly:integrationFullScanEnabled:
+      description: Full scan enabled?
+      default: true
