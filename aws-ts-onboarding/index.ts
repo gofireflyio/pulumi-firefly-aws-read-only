@@ -44,7 +44,7 @@ firefly.authenticate(fireflyEndpoint, fireflyAccessKey, fireflySecretKey).then(r
                         externalId,
                         fireflyIntegrationFullScanEnabled,
                         fireflyIntegrationIsProd).then(res => {
-                        pulumi.log.info(`integration has created successfully. res=${JSON.stringify(res.data)}`);
+                        pulumi.log.info(`integration has created successfully.`);
                     }).catch(err => {
                         pulumi.log.error(`Could not create integration. err=${err}`);
                     })
