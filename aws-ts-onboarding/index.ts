@@ -33,19 +33,23 @@ firefly.authenticate(fireflyEndpoint, fireflyAccessKey, fireflySecretKey).then(r
     iam.roleArn.apply(roleArn => {
         iam.externalId.apply(externalId => {
             pulumi.log.info(`created IAM Role successfully. arn=${roleArn}, externalID=${externalId}`);
-
-            firefly.createIntegration(
-                fireflyEndpoint,
-                authToken,
-                fireflyIntegrationName,
-                roleArn,
-                externalId,
-                fireflyIntegrationFullScanEnabled,
-                fireflyIntegrationIsProd).then(res => {
-                pulumi.log.info(`integration has created successfully. res=${JSON.stringify(res.data)}`);
-            }).catch(err => {
-                pulumi.log.error(`Could not create integration. err=${err}`);
-            })
+            pulumi.log.info("waiting 10s to create the role...");
+            setTimeout(() => {
+                    pulumi.log.info("Creating integration will fail on preview!!");
+                    firefly.createIntegration(
+                        fireflyEndpoint,
+                        authToken,
+                        fireflyIntegrationName,
+                        roleArn,
+                        externalId,
+                        fireflyIntegrationFullScanEnabled,
+                        fireflyIntegrationIsProd).then(res => {
+                        pulumi.log.info(`integration has created successfully.`);
+                    }).catch(err => {
+                        pulumi.log.error(`Could not create integration. err=${err}`);
+                    })
+                },
+                10000);
         })
     })
 }).catch(err => {
