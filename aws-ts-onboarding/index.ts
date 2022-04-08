@@ -53,5 +53,6 @@ firefly.authenticate(fireflyEndpoint, fireflyAccessKey, fireflySecretKey).then(r
         })
     })
 }).catch(err => {
+    pulumi.log.warn(`Authentication with Firefly works only with pulumi up`);
     pulumi.log.error(`Could not authenticate to firefly. err=${err}`);
 });
