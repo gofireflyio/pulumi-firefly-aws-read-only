@@ -4,6 +4,8 @@ import * as random from "@pulumi/random";
 import * as config from "./config";
 
 const awsConfig = new pulumi.Config("aws");
+//IAM is a globally accessible resources
+const providerOpts = {provider: new aws.Provider("prov", {region: "us-east-1"})};
 const randomString = new random.RandomString("externalId", {
     length: 12,
     special: false,
@@ -156,7 +158,7 @@ const fireflyReadonlyDenylist = resourcesSuffix.result.apply(result => new aws.i
                 }
             ],
         }),
-    })
+    }, providerOpts)
 )
 
 const s3SpecificWritePermission = resourcesSuffix.result.apply(result => new aws.iam.Policy(`S3SpecificWritePermission-${result}`, {
@@ -181,38 +183,37 @@ const s3SpecificWritePermission = resourcesSuffix.result.apply(result => new aws
                 },
             ],
         })
-    })
+    }, providerOpts)
 );
 
 const fireflyCrossAccountAccessRole = resourcesSuffix.result.apply(random => {
-    const policy = {
-        Version: "2012-10-17",
-        Statement: [{
-            Action: "sts:AssumeRole",
-            Principal: {
-                AWS: `arn:aws:iam::${config.ORGANIZATION_ID}:root`,
-            },
-            Effect: "Allow"
-        }],
-    }
 
+    const statement = {
+        Action: "sts:AssumeRole",
+        Principal: {
+            AWS: `arn:aws:iam::${config.ORGANIZATION_ID}:root`,
+        },
+        Effect: "Allow"
+    };
     if (awsConfig.getBoolean("supportExternalId")) {
-        policy["Condition"] = randomString.result.apply(result => JSON.stringify({
+        statement["Condition"] = randomString.result.apply(result => JSON.stringify({
             StringEquals: {
                 "sts:ExternalId": result,
             },
         }))
     }
-
     return new aws.iam.Role(`fireflyCrossAccountAccessRole`, {
-        assumeRolePolicy: JSON.stringify(policy),
+        assumeRolePolicy: JSON.stringify({
+            Version: "2012-10-17",
+            Statement: [statement],
+        }),
         managedPolicyArns: [
             "arn:aws:iam::aws:policy/SecurityAudit",
             "arn:aws:iam::aws:policy/ReadOnlyAccess",
             fireflyReadonlyDenylist.arn,
             s3SpecificWritePermission.arn
         ],
-    });
+    }, providerOpts);
 })
 
 export const roleArn = fireflyCrossAccountAccessRole.arn
