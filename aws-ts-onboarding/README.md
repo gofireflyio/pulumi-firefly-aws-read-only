@@ -1,4 +1,4 @@
-[![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/infralight/pulumi-firefly-aws-read-only/blob/main/aws-ts-onboarding/README.md)
+[![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/gofireflyio/pulumi-firefly-aws-read-only/blob/main/aws-ts-onboarding/README.md)
 # Firefly AWS ReadOnly Integration
 # ![Firefly Logo](../firefly.gif)
 
