@@ -13,7 +13,7 @@ template:
       description: Is Production?
     firefly:endpoint:
       description: The Firefly endpoint to register account management
-      default: https://prodapi.infralight.cloud/api
+      default: https://prodapi.gofirefly.io/api
     firefly:integrationFullScanEnabled:
       description: Full scan enabled?
       default: true
